@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
@@ -49,7 +50,6 @@ const Nav = () => {
           </div>
         ) : (
           <>
-
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -58,6 +58,7 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
+                
                   Sign-In with {provider.name}
                 </button>
               ))}
@@ -115,6 +116,7 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
+                  
                   Sign-In with {provider.name}
                 </button>
               ))}
