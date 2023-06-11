@@ -21,7 +21,25 @@ const Profile = () => {
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
-  const handleDelete = (post) => {};
+
+  const handleDelete = async (post) => {
+    const hasConfirmed = confirm("Are you sure you want to delete this post?");
+    if (hasConfirmed) {
+      try {
+        const response = await fetch(`/api/prompt/${post._id.toString()}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          setPosts((prevPosts) =>
+            prevPosts.filter((item) => item._id !== post._id)
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <ProfilePage
       name='My'

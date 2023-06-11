@@ -34,7 +34,7 @@ const PromptCard = ({ post, handleTagClick, handleDelete, handleEdit }) => {
             </p>
           </div>
         </div>
-        <div className='copt-btn' onClick={handleCopy}>
+        <div className='copy-btn' onClick={handleCopy}>
           <Image
             className='cursor-pointer'
             src={
