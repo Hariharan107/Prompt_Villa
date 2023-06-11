@@ -3,10 +3,19 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-const PromptCard = ({ post, handleTagClick, handleDelete, handleEdit }) => {
-  console.log(post);
+const PromptCard = ({
+  post,
+  handleTagClick,
+  handleDelete,
+  handleEdit,
+}) => {
+  // console.log(post);
   const [copied, setCopied] = useState("");
-
+  const handleCopy=()=>{
+    setCopied(post.prompt)
+    navigator.clipboard.writeText(post.prompt)
+    setTimeout(()=>setCopied(''),3000)
+  }
   return (
     <div className='prompt_card'>
       <div className='flex justify-between items-start gap-5'>
@@ -27,8 +36,9 @@ const PromptCard = ({ post, handleTagClick, handleDelete, handleEdit }) => {
             </p>
           </div>
         </div>
-        <div className='copt-btn' onClick={() => {}}>
+        <div className='copt-btn' onClick={handleCopy}>
           <Image
+          className="cursor-pointer"
             src={
               copied === post.prompt
                 ? "assets/icons/tick.svg"
@@ -39,6 +49,13 @@ const PromptCard = ({ post, handleTagClick, handleDelete, handleEdit }) => {
           />
         </div>
       </div>
+      <p className='my-4 font-satoshi text-sm text-gary-700'>{post.prompt}</p>
+      <p
+        className='font-inter text-sm blue_gradient cursor-pointer'
+        onClick={() => handleTagClick && handleTagClick(post.tag)}
+      >
+        {post.tag}
+      </p>
     </div>
   );
 };
